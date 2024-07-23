@@ -4,9 +4,6 @@ description: 'My eval'
 prompts:
   - "In less than 50 words answer the following question: {{ topic }}"
 
-
-
-
 providers:
   - id: 'http://localhost:8888/v1/chat/completions/'
     config:
@@ -26,6 +23,17 @@ providers:
         ]
       }
       responseParser: 'json.choices[0].message.content'
+
+defaultTest:
+  options:
+    provider:
+      embedding:
+        id: openai:embedding:local
+        config:
+          apiHost: http://localhost:9999/v1
+          apiKey: blah
+
+
 tests:
   # - vars:
   #     topic: Describe the Parasol insurance Apex plus package?
