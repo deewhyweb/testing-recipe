@@ -1,0 +1,58 @@
+# Learn more about building a configuration: https://promptfoo.dev/docs/configuration/guide
+description: 'My eval'
+
+prompts:
+  - "In less than 50 words answer the following question: {{ topic }}"
+
+
+
+
+providers:
+  - id: 'http://localhost:8888/v1/chat/completions/'
+    config:
+      method: 'POST'
+      headers:
+        'Content-Type': 'application/json'
+      body: {
+        messages : [   
+          {
+            content: 'You are a helpful assistant.',
+            role: 'system'
+          },
+          {
+            content: '{{prompt}}',
+            role: 'user'
+          }
+        ]
+      }
+      responseParser: 'json.choices[0].message.content'
+tests:
+  # - vars:
+  #     topic: Describe the Parasol insurance Apex plus package?
+
+  # - vars:
+  #     topic: Describe the Parasol insurance Apex plus package?
+  #   assert:
+  #     - type: similar
+  #       value: "Parasol Insurance Apex Plus coverage provides comprehensive protection for customers who need more than the standard auto policy offers. This package includes uninsured motorist coverage, rental reimbursement, and roadside assistance as part of its base features, ensuring that you are fully covered in any situation involving your car or truck. Additionally, it offers optional endorsements like comprehensive physical damage protection which will help pay for repairs when an insured event occurs even if you were at fault. The deductible is typically $500 but can be adjusted based on your needs and the type of vehicle being covered. Overall, Parasol Insurance Apex plus coverage provides excellent value with extensive benefits that are not available in most standard policies"
+  #       threshold: 0.8
+
+  - vars:
+      topic: Are Parasol insurance customers eligable for loss of income coverage?
+    assert:
+      - type: similar
+        value: "Parasol insurance customers are eligible for the optional Apex plus package which provides coverage for loss of income insurance as part of their policy"
+        threshold: 0.8
+  - vars:
+      topic: Who are Parasol insurance?
+    assert:
+      - type: similar
+        value: "Parasol insurance provides cover for taxis, private hire vehicles and public liability to drivers who are self-employed or working through an umbrella company."
+        threshold: 0.8
+  - vars:
+      topic: What is the Apex plus package from Parasol insurance?
+    assert:
+      - type: similar
+        value: "The Apex plus package from Parasol includes coverage for bodily injury and property damage, as well as optional coverages such as comprehensive coverage and loss of use. This package provides drivers with flexible options to customize their auto insurance policy based on their specific needs and budget constraints."
+        threshold: 0.8
+
