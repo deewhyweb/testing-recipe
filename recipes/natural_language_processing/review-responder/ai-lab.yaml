@@ -2,7 +2,7 @@ version: v1.0
 application:
   type: language
   name: Testing_App
-  description: Parasol LLM Testing application
+  description: Parasol LLM Testing App
   containers:
     - name: parasol-testing-app
       contextdir: app
