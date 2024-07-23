@@ -1,22 +1,10 @@
 version: v1.0
 application:
   type: language
-  name: Sentiment_App
-  description: Analyze sentiment of text.
+  name: Testing_App
+  description: Parasol LLM Testing application
   containers:
-    - name: llamacpp-server
-      contextdir: ../../../model_servers/llamacpp_python
-      containerfile: ./base/Containerfile
-      model-service: true
-      backend:
-        - llama
-      arch:
-        - arm64
-        - amd64
-      ports:
-        - 8001
-      image: quay.io/ai-lab/llamacpp_python:latest
-    - name: streamlit-sentiment-app
+    - name: parasol-testing-app
       contextdir: app
       containerfile: Containerfile
       arch:
